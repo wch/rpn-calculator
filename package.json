@@ -11,7 +11,7 @@
     "build-standalone": "tsc --noEmit && tsx build.ts",
     "build-standalone-prod": "tsc --noEmit && tsx build.ts --production",
     "watch-standalone": "concurrently \"tsc --noEmit --watch\" \"tsx build.ts --watch\"",
-    "serve": "npx serve dist -s -p 3000",
+    "serve": "serve dist -s -p 3000",
     "clean": "rm -rf dist"
   },
   "author": "Winston Chang",

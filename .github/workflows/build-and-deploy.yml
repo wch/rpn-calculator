@@ -1,4 +1,4 @@
-name: Build and Deploy to gh-pages Branch
+name: Build and Deploy to gh-pages branch
 
 on:
   push:
@@ -37,9 +37,11 @@ jobs:
       run: |
         git checkout -B gh-pages
 
-    - name: Add built files
+    # gh-pages needs files to be in docs/ directory
+    - name: Rename and add built files
       run: |
-        git add -f dist/
+        mv dist/ docs/
+        git add -f docs/
 
     - name: Commit changes
       run: |

@@ -94,14 +94,9 @@ async function main() {
           console.log(`Building .js bundle for ${target} target...`);
           await context.rebuild();
 
-          // Copy HTML file for standalone builds
-          if (target === "standalone") {
-            console.log("Copying HTML file...");
-            copyFileSync("index.html", "dist/index.html");
-            console.log(`✓ Successfully built standalone app in dist/`);
-          } else {
-            console.log(`✓ Successfully built ${target}/www/main.js`);
-          }
+          console.log("Copying HTML file...");
+          copyFileSync("index.html", "dist/index.html");
+          console.log(`✓ Successfully built standalone app in dist/`);
 
           await context.dispose();
         })
