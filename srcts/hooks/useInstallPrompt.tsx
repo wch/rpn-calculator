@@ -27,7 +27,6 @@ export function useInstallPrompt(): InstallPromptState {
   const isStandalone =
     typeof window !== "undefined" &&
     (window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as any).standalone === true || // iOS Safari
       document.referrer.includes("android-app://"));
 
   // Check if app is already installed
