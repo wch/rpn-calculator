@@ -80,12 +80,69 @@ export function App() {
   // Global keyboard handler
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Prevent handling if user is typing in the input field
-      if (event.target instanceof HTMLInputElement) {
+      const key = event.key;
+      const isInputFocused = event.target instanceof HTMLInputElement;
+
+      // Operations should work even when input is focused
+      if (key === '+') {
+        event.preventDefault();
+        handleOperation('+');
+        return;
+      }
+      else if (key === '-') {
+        event.preventDefault();
+        handleOperation('-');
+        return;
+      }
+      else if (key === '*') {
+        event.preventDefault();
+        handleOperation('*');
+        return;
+      }
+      else if (key === '/') {
+        event.preventDefault();
+        handleOperation('/');
+        return;
+      }
+      // Enter key should work when input is focused (handled by input's onKeyDown)
+      else if (key === 'Enter' && !isInputFocused) {
+        event.preventDefault();
+        handleEnter();
+        return;
+      }
+      // Delete key for drop
+      else if (key === 'Delete') {
+        event.preventDefault();
+        handleDrop();
+        return;
+      }
+      // Escape for clear
+      else if (key === 'Escape') {
+        event.preventDefault();
+        handleClear();
+        return;
+      }
+      // Advanced operations
+      else if (key.toLowerCase() === 's') {
+        event.preventDefault();
+        handleOperation('sqrt');
+        return;
+      }
+      else if (key.toLowerCase() === 'p') {
+        event.preventDefault();
+        handleOperation('pow');
+        return;
+      }
+      else if (key.toLowerCase() === 'w') {
+        event.preventDefault();
+        handleOperation('swap');
         return;
       }
 
-      const key = event.key;
+      // Only handle these keys when input is NOT focused
+      if (isInputFocused) {
+        return;
+      }
 
       // Numbers
       if (key >= '0' && key <= '9') {
@@ -97,57 +154,10 @@ export function App() {
         event.preventDefault();
         handleDigit('.');
       }
-      // Operations
-      else if (key === '+') {
-        event.preventDefault();
-        handleOperation('+');
-      }
-      else if (key === '-') {
-        event.preventDefault();
-        handleOperation('-');
-      }
-      else if (key === '*') {
-        event.preventDefault();
-        handleOperation('*');
-      }
-      else if (key === '/') {
-        event.preventDefault();
-        handleOperation('/');
-      }
-      // Enter key
-      else if (key === 'Enter') {
-        event.preventDefault();
-        handleEnter();
-      }
       // Backspace to delete last digit from current input
       else if (key === 'Backspace') {
         event.preventDefault();
         setCurrentInput(prev => prev.slice(0, -1));
-      }
-      // Delete key for drop (remove from stack)
-      else if (key === 'Delete') {
-        event.preventDefault();
-        handleDrop();
-      }
-      // Escape for clear
-      else if (key === 'Escape') {
-        event.preventDefault();
-        handleClear();
-      }
-      // 's' for square root
-      else if (key.toLowerCase() === 's') {
-        event.preventDefault();
-        handleOperation('sqrt');
-      }
-      // 'p' for power/square
-      else if (key.toLowerCase() === 'p') {
-        event.preventDefault();
-        handleOperation('pow');
-      }
-      // 'w' for swap
-      else if (key.toLowerCase() === 'w') {
-        event.preventDefault();
-        handleOperation('swap');
       }
     };
 
