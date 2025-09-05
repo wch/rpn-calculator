@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "name": "rpn-calculator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "RPN Calculator - Standalone client-side app with React and shadcn/ui components",
+  "scripts": {
+    "build": "concurrently \"tsc --noEmit\" \"tsx build.ts\"",
+    "watch": "concurrently \"tsc --noEmit --watch\" \"tsx build.ts --watch\"",
+    "build-prod": "tsc --noEmit && tsx build.ts --production",
+    "build-standalone": "tsc --noEmit && tsx build.ts",
+    "build-standalone-prod": "tsc --noEmit && tsx build.ts --production",
+    "watch-standalone": "concurrently \"tsc --noEmit --watch\" \"tsx build.ts --watch\"",
+    "serve": "npx serve dist -s -p 3000",
+    "clean": "rm -rf dist"
+  },
+  "author": "Winston Chang",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.1",
+    "autoprefixer": "^10.4.16",
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.25.9",
+    "esbuild-plugin-tailwindcss": "^2.1.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "serve": "^14.2.4",
+    "tailwindcss": "^4.1.12",
+    "tsx": "^4.20.4",
+    "tw-animate-css": "^1.3.8",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.542.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwind-merge": "^3.3.1"
+  }
+}
