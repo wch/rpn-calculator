@@ -2,16 +2,20 @@
  * Service Worker for RPN Calculator PWA
  * Provides offline functionality and caching strategies
  */
-
 /// <reference lib="WebWorker" />
+
+import { version as __PACKAGE_VERSION__ } from "../package.json";
 
 // Export empty type because of isolatedModules flag.
 export type {};
 declare const self: ServiceWorkerGlobalScope;
 
-const CACHE_NAME = "rpn-calculator-v2";
-const STATIC_CACHE_NAME = "rpn-calculator-static-v2";
-const DYNAMIC_CACHE_NAME = "rpn-calculator-dynamic-v2";
+// Version is injected at build time from package.json
+// const __VERSION__: string = packageJson.version;
+
+const CACHE_NAME = `rpn-calculator-v${__PACKAGE_VERSION__}`;
+const STATIC_CACHE_NAME = `rpn-calculator-static-v${__PACKAGE_VERSION__}`;
+const DYNAMIC_CACHE_NAME = `rpn-calculator-dynamic-v${__PACKAGE_VERSION__}`;
 
 // Files to cache for offline functionality
 const STATIC_ASSETS = [

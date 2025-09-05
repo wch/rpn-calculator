@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "rpn-calculator",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "RPN Calculator - Standalone client-side app with React and shadcn/ui components",
   "scripts": {
