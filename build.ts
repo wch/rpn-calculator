@@ -1,11 +1,40 @@
 import chokidar from "chokidar";
 import * as esbuild from "esbuild";
 import tailwindPlugin from "esbuild-plugin-tailwindcss";
-import { existsSync, mkdirSync, copyFileSync } from "node:fs";
+import { existsSync, mkdirSync, copyFileSync, cpSync } from "node:fs";
+import { join } from "node:path";
 
 const production = process.argv.includes("--production");
 const watch = process.argv.includes("--watch");
 const metafile = process.argv.includes("--metafile");
+
+// Copy PWA assets to dist
+function copyPWAAssets() {
+  console.log("Copying PWA assets...");
+  
+  // Copy PWA files from public directory
+  const pwaFiles = [
+    'manifest.json',
+    'sw.js', 
+    'browserconfig.xml'
+  ];
+  
+  pwaFiles.forEach(file => {
+    if (existsSync(join('public', file))) {
+      copyFileSync(join('public', file), join('dist', file));
+      console.log(`✓ Copied ${file}`);
+    }
+  });
+  
+  // Copy icons directory
+  if (existsSync('public/icons')) {
+    if (!existsSync('dist/icons')) {
+      mkdirSync('dist/icons');
+    }
+    cpSync('public/icons', 'dist/icons', { recursive: true });
+    console.log('✓ Copied icons directory');
+  }
+}
 
 async function main() {
   const buildmap: Record<string, Promise<esbuild.BuildContext>> = {};
@@ -40,8 +69,11 @@ async function main() {
     // Copy HTML for standalone builds
     console.log("Copying HTML file...");
     copyFileSync("index.html", "dist/index.html");
+    
+    // Copy PWA assets
+    copyPWAAssets();
 
-    const watchPaths = ["srcts/", "tailwind.config.js", "index.html"];
+    const watchPaths = ["srcts/", "tailwind.config.js", "index.html", "public/"];
 
     const watcher = chokidar.watch(watchPaths, {
       persistent: true,
@@ -59,10 +91,16 @@ async function main() {
         try {
           await Promise.all(contexts.map((context) => context.rebuild()));
 
-          // Copy HTML file if it changed and we're in standalone mode
+          // Copy HTML file if it changed
           if (path === "index.html") {
             console.log("Copying updated HTML file...");
             copyFileSync("index.html", "dist/index.html");
+          }
+          
+          // Copy PWA assets if they changed
+          if (path.startsWith("public/")) {
+            console.log("Copying updated PWA assets...");
+            copyPWAAssets();
           }
         } catch (error) {
           console.error("Rebuild failed:", error);
@@ -96,7 +134,11 @@ async function main() {
 
           console.log("Copying HTML file...");
           copyFileSync("index.html", "dist/index.html");
-          console.log(`✓ Successfully built standalone app in dist/`);
+          
+          // Copy PWA assets
+          copyPWAAssets();
+          
+          console.log(`✓ Successfully built standalone PWA in dist/`);
 
           await context.dispose();
         })

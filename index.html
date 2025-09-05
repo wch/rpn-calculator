@@ -5,11 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RPN Calculator</title>
     <meta name="description" content="A fully client-side RPN (Reverse Polish Notation) calculator built with React and TypeScript">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
-    <link rel="stylesheet" href="./main.css">
-    <meta name="theme-color" content="#3b82f6">
-    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" href="./icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/icon-16.png">
+    <link rel="shortcut icon" href="./icons/favicon.ico">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="./icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-192.png">
+    
+    <!-- Apple PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="RPN Calculator">
+    
+    <!-- Microsoft/Windows PWA -->
+    <meta name="msapplication-TileColor" content="#3b82f6">
+    <meta name="msapplication-TileImage" content="./icons/icon-144.png">
+    <meta name="msapplication-config" content="./browserconfig.xml">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3b82f6">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e40af">
+    
+    <!-- Mobile Web App -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-title" content="RPN Calculator">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="RPN Calculator">
+    <meta property="og:description" content="A fully client-side RPN (Reverse Polish Notation) calculator built with React and TypeScript">
+    <meta property="og:image" content="./icons/icon-512.png">
+    <meta property="og:url" content="./">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RPN Calculator">
+    <meta name="twitter:description" content="A fully client-side RPN (Reverse Polish Notation) calculator built with React and TypeScript">
+    <meta name="twitter:image" content="./icons/icon-512.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./main.css">
     <style>
         html {
             font-size: 16px;
