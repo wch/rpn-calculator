@@ -168,17 +168,18 @@ export function App() {
           <CardContent className='flex flex-col p-3 sm:p-6 space-y-3 sm:space-y-4 overflow-hidden'>
             {/* Stack Display */}
             <div className='flex-shrink-0 space-y-2'>
-              <div className='bg-muted p-2 sm:p-3 border rounded-md h-40 sm:min-h-[120px] font-mono overflow-y-auto'>
+              <div className='bg-muted p-2 sm:p-3 border rounded-md h-40 sm:min-h-[120px] font-mono overflow-y-auto flex flex-col justify-end'>
                 {displayStack && displayStack.length > 0 ? (
                   <div className='space-y-1'>
-                    {displayStack.slice(-4).reverse().map((value, index) => (
-                      <div key={index} className={`text-sm ${index === 0 ? 'font-bold' : ''}`}>
-                        {displayStack.length - index}: {value}
+                    {displayStack.slice(-4).map((value, index) => (
+                      <div key={index} className={`text-xl flex justify-between ${index === displayStack.slice(-4).length - 1 ? 'font-bold' : ''}`}>
+                        <span>{displayStack.length - displayStack.slice(-4).length + index + 1}:</span>
+                        <span>{value}</span>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className='text-sm text-muted-foreground'>Stack empty</div>
+                  <div className='text-xl text-muted-foreground text-right'>Stack empty</div>
                 )}
               </div>
             </div>
@@ -193,7 +194,7 @@ export function App() {
                 onChange={handleInputChange}
                 onKeyDown={handleInputKeyDown}
                 placeholder='0'
-                className='font-mono text-right text-2xl sm:text-3xl h-10 sm:h-12'
+                className='font-mono text-right text-xl sm:text-xl h-10 sm:h-12'
               />
             </div>
 
@@ -252,7 +253,7 @@ export function App() {
             </div>
           </CardContent>
         </Card>
-        
+
         {/* PWA Install Prompt */}
         <InstallPrompt />
       </div>
