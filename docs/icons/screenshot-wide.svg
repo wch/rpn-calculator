@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- Background -->
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  
+  <!-- Mock browser/app frame -->
+  <rect x="240" y="60" width="800" height="600" fill="#ffffff" rx="12" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- App header -->
+  <rect x="240" y="60" width="800" height="80" fill="#3b82f6" rx="12"/>
+  <rect x="240" y="128" width="800" height="12" fill="#3b82f6"/>
+  <text x="640" y="110" text-anchor="middle" fill="white" font-size="32" font-weight="bold">RPN Calculator</text>
+  
+  <!-- Calculator interface mockup -->
+  <rect x="340" y="180" width="600" height="400" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Display -->
+  <rect x="380" y="220" width="520" height="80" fill="#1e293b" rx="4"/>
+  <text x="860" y="270" text-anchor="end" fill="#f1f5f9" font-size="24" font-family="monospace">123.45</text>
+  
+  <!-- Button grid mockup -->
+  <rect x="400" y="330" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="480" y="330" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="560" y="330" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="640" y="330" width="60" height="40" rx="4" fill="#fbbf24"/>
+  
+  <rect x="400" y="390" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="480" y="390" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="560" y="390" width="60" height="40" rx="4" fill="#e2e8f0"/>
+  <rect x="640" y="390" width="60" height="40" rx="4" fill="#fbbf24"/>
+  
+  <!-- Enter button -->
+  <rect x="480" y="450" width="120" height="40" rx="4" fill="#10b981"/>
+  <text x="540" y="475" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ENTER</text>
+  
+  <!-- Title -->
+  <text x="640" y="40" text-anchor="middle" fill="#1e293b" font-size="28" font-weight="bold">RPN Calculator - Installable PWA</text>
+</svg>

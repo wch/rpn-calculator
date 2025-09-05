@@ -1,0 +1,26 @@
+{
+  "name": "RPN Calculator",
+  "short_name": "RPN Calc",
+  "description": "A fully client-side RPN (Reverse Polish Notation) calculator built with React and TypeScript",
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#f8fafc",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./icons/screenshot-wide.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ]
+}
