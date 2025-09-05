@@ -15,7 +15,6 @@ function copyPWAAssets() {
   // Copy PWA files from public directory
   const pwaFiles = [
     'manifest.json',
-    'sw.js', 
     'browserconfig.xml'
   ];
   
@@ -55,6 +54,19 @@ async function main() {
     logLevel: "info",
     metafile: metafile,
     plugins: [tailwindPlugin()],
+  });
+
+  // Build service worker separately (no plugins needed)
+  buildmap.serviceworker = esbuild.context({
+    entryPoints: ["srcts/sw.ts"],
+    outfile: "dist/sw.js",
+    bundle: true,
+    format: "esm",
+    minify: production,
+    sourcemap: production ? undefined : "linked",
+    sourcesContent: true,
+    logLevel: "info",
+    metafile: metafile,
   });
 
   if (watch) {
