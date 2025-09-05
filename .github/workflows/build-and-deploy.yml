@@ -2,7 +2,7 @@ name: Build and Deploy to gh-pages branch
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-deploy:
@@ -11,46 +11,46 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build-prod
 
-    - name: Configure Git
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
 
-    - name: Create and switch to gh-pages branch
-      run: |
-        git checkout -B gh-pages
+      - name: Create and switch to gh-pages branch
+        run: |
+          git checkout -B gh-pages
 
-    # gh-pages needs files to be in docs/ directory
-    - name: Rename and add built files
-      run: |
-        mv dist/ docs/
-        git add -f docs/
+      # gh-pages needs files to be in docs/ directory
+      - name: Rename and add built files
+        run: |
+          mv dist/ docs/
+          git add -f docs/
 
-    - name: Commit changes
-      run: |
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Build: Deploy built files from commit ${{ github.sha }}"
-        fi
+      - name: Commit changes
+        run: |
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Build: Deploy built files from commit ${{ github.sha }}"
+          fi
 
-    - name: Push to gh-pages branch
-      run: |
-        git push -f origin gh-pages
+      - name: Push to gh-pages branch
+        run: |
+          git push -f origin gh-pages

@@ -1,9 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
   userChoice: Promise<{
-    outcome: 'accepted' | 'dismissed';
+    outcome: "accepted" | "dismissed";
     platform: string;
   }>;
 }
@@ -18,16 +18,17 @@ interface InstallPromptState {
 }
 
 export function useInstallPrompt(): InstallPromptState {
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [installPrompt, setInstallPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [userDismissed, setUserDismissed] = useState(false);
 
   // Check if app is running in standalone mode
-  const isStandalone = typeof window !== 'undefined' && (
-    window.matchMedia('(display-mode: standalone)').matches ||
-    (window.navigator as any).standalone === true || // iOS Safari
-    document.referrer.includes('android-app://')
-  );
+  const isStandalone =
+    typeof window !== "undefined" &&
+    (window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as any).standalone === true || // iOS Safari
+      document.referrer.includes("android-app://"));
 
   // Check if app is already installed
   useEffect(() => {
@@ -40,50 +41,53 @@ export function useInstallPrompt(): InstallPromptState {
       // Prevent the mini-infobar from appearing on mobile
       event.preventDefault();
       setInstallPrompt(event as BeforeInstallPromptEvent);
-      console.log('[PWA] Install prompt available');
+      console.log("[PWA] Install prompt available");
     };
 
     const handleAppInstalled = () => {
-      console.log('[PWA] App was installed');
+      console.log("[PWA] App was installed");
       setIsInstalled(true);
       setInstallPrompt(null);
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+      window.removeEventListener("appinstalled", handleAppInstalled);
     };
   }, []);
 
   // Function to trigger the install prompt
   const promptInstall = useCallback(async (): Promise<boolean> => {
     if (!installPrompt) {
-      console.log('[PWA] No install prompt available');
+      console.log("[PWA] No install prompt available");
       return false;
     }
 
     try {
       // Show the install prompt
       await installPrompt.prompt();
-      
+
       // Wait for the user's response
       const choiceResult = await installPrompt.userChoice;
-      console.log('[PWA] User choice:', choiceResult);
-      
-      if (choiceResult.outcome === 'accepted') {
-        console.log('[PWA] User accepted the install prompt');
+      console.log("[PWA] User choice:", choiceResult);
+
+      if (choiceResult.outcome === "accepted") {
+        console.log("[PWA] User accepted the install prompt");
         setInstallPrompt(null);
         return true;
       } else {
-        console.log('[PWA] User dismissed the install prompt');
+        console.log("[PWA] User dismissed the install prompt");
         setUserDismissed(true);
         return false;
       }
     } catch (error) {
-      console.error('[PWA] Error showing install prompt:', error);
+      console.error("[PWA] Error showing install prompt:", error);
       return false;
     }
   }, [installPrompt]);

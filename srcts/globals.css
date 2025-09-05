@@ -117,12 +117,12 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html {
     height: 100%;
     overflow: hidden;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     height: 100%;
@@ -132,12 +132,12 @@
     position: fixed;
     width: 100%;
   }
-  
+
   #root {
     height: 100%;
     overflow: hidden;
   }
-  
+
   /* Handle mobile address bar changes */
   @supports (height: 100dvh) {
     body {

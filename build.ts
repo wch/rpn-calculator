@@ -1,7 +1,7 @@
 import chokidar from "chokidar";
 import * as esbuild from "esbuild";
 import tailwindPlugin from "esbuild-plugin-tailwindcss";
-import { existsSync, mkdirSync, copyFileSync, cpSync } from "node:fs";
+import { copyFileSync, cpSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
 const production = process.argv.includes("--production");
@@ -11,27 +11,24 @@ const metafile = process.argv.includes("--metafile");
 // Copy PWA assets to dist
 function copyPWAAssets() {
   console.log("Copying PWA assets...");
-  
+
   // Copy PWA files from public directory
-  const pwaFiles = [
-    'manifest.json',
-    'browserconfig.xml'
-  ];
-  
-  pwaFiles.forEach(file => {
-    if (existsSync(join('public', file))) {
-      copyFileSync(join('public', file), join('dist', file));
+  const pwaFiles = ["manifest.json", "browserconfig.xml"];
+
+  pwaFiles.forEach((file) => {
+    if (existsSync(join("public", file))) {
+      copyFileSync(join("public", file), join("dist", file));
       console.log(`✓ Copied ${file}`);
     }
   });
-  
+
   // Copy icons directory
-  if (existsSync('public/icons')) {
-    if (!existsSync('dist/icons')) {
-      mkdirSync('dist/icons');
+  if (existsSync("public/icons")) {
+    if (!existsSync("dist/icons")) {
+      mkdirSync("dist/icons");
     }
-    cpSync('public/icons', 'dist/icons', { recursive: true });
-    console.log('✓ Copied icons directory');
+    cpSync("public/icons", "dist/icons", { recursive: true });
+    console.log("✓ Copied icons directory");
   }
 }
 
@@ -81,11 +78,16 @@ async function main() {
     // Copy HTML for standalone builds
     console.log("Copying HTML file...");
     copyFileSync("index.html", "dist/index.html");
-    
+
     // Copy PWA assets
     copyPWAAssets();
 
-    const watchPaths = ["srcts/", "tailwind.config.js", "index.html", "public/"];
+    const watchPaths = [
+      "srcts/",
+      "tailwind.config.js",
+      "index.html",
+      "public/",
+    ];
 
     const watcher = chokidar.watch(watchPaths, {
       persistent: true,
@@ -108,7 +110,7 @@ async function main() {
             console.log("Copying updated HTML file...");
             copyFileSync("index.html", "dist/index.html");
           }
-          
+
           // Copy PWA assets if they changed
           if (path.startsWith("public/")) {
             console.log("Copying updated PWA assets...");
@@ -146,10 +148,10 @@ async function main() {
 
           console.log("Copying HTML file...");
           copyFileSync("index.html", "dist/index.html");
-          
+
           // Copy PWA assets
           copyPWAAssets();
-          
+
           console.log(`✓ Successfully built standalone PWA in dist/`);
 
           await context.dispose();
