@@ -159,16 +159,15 @@ export function App() {
 
   return (
     <div className='h-dvh w-full bg-background p-2 sm:p-4 sm:min-h-dvh overflow-hidden'>
-      <div className='h-full w-full max-w-md mx-auto flex flex-col'>
-        <Card className='flex-1 flex flex-col h-full overflow-hidden'>
-          <CardHeader className='flex-shrink-0 pt-3 pb-0'>
+      <div className='sm:min-h-dvh w-full max-w-md mx-auto'>
+        <Card className='overflow-hidden'>
+          <CardHeader className='pt-3 pb-0'>
             <CardTitle className="text-center">RPN Calculator</CardTitle>
           </CardHeader>
-          <CardContent className='flex-1 flex flex-col p-3 sm:p-6 space-y-3 sm:space-y-4 overflow-hidden'>
+          <CardContent className='flex flex-col p-3 sm:p-6 space-y-3 sm:space-y-4 overflow-hidden'>
             {/* Stack Display */}
             <div className='flex-shrink-0 space-y-2'>
-              <label className='text-sm font-medium'>Stack:</label>
-              <div className='bg-muted p-2 sm:p-3 rounded-md h-25 sm:min-h-[120px] font-mono overflow-y-auto'>
+              <div className='bg-muted p-2 sm:p-3 border rounded-md h-40 sm:min-h-[120px] font-mono overflow-y-auto'>
                 {displayStack && displayStack.length > 0 ? (
                   <div className='space-y-1'>
                     {displayStack.slice(-4).reverse().map((value, index) => (
@@ -185,9 +184,6 @@ export function App() {
 
             {/* Current Input */}
             <div className='flex-shrink-0 space-y-2'>
-              <label htmlFor='number-input' className='text-sm font-medium'>
-                Enter Number:
-              </label>
               <Input
                 id='number-input'
                 type='text'
