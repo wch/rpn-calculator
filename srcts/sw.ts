@@ -187,7 +187,7 @@ self.addEventListener("message", (event) => {
 });
 
 // Background sync for future enhancements
-self.addEventListener("sync", (event) => {
+self.addEventListener("sync", (event: any) => {
   console.log("[SW] Background sync:", event.tag);
 
   if (event.tag === "background-sync") {
